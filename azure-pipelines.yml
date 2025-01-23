@@ -3,18 +3,19 @@ trigger:
     include:
       - main
       - dev
+      - master
 
 
 variables:
   # Azure DevOps Variables
-  azureSubscription: 'MyAzureSubscription'     # Azure subscription name
-  resourceGroup: 'MyResourceGroup'             # Resource Group name
-  appName: 'hello-world-app-test'                   # App name for the application
-  region: 'eastus'                             # Azure region
-  keyVaultName: 'MyKeyVault-test'                   # Name of Azure Key Vault for secrets
+  azureSubscription: 'AzureSubscription'     # Azure subscription name
+  resourceGroup: 'ResourceGroup'             # Resource Group name
+  appName: 'HelloWorldApp'                   # App name for the application
+  region: 'eastus'                             # Azure region where the app service is there
+  keyVaultName: 'KeyVault-test'                   # Name of Azure Key Vault to store secret
   sonarCloudOrganization: 'my-orgnization'             # SonarCloud organization
   sonarCloudProjectKey: 'hello-world'          # SonarCloud project key
-  sonarCloudToken: $(SONAR_CLOUD_TOKEN)       # Secure token from Azure Key Vault or pipeline variable
+  sonarCloudToken: $(SonarCloudToken)       # Secure token from Azure Key Vault or pipeline variable
 
 stages:
   - stage: Build
@@ -30,6 +31,7 @@ stages:
             inputs:
               packageType: 'sdk'
               version: 'latest'
+
 
           - task: Checkout@1
             displayName: 'Checkout Code'
